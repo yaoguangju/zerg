@@ -1,0 +1,94 @@
+{extend name='base' /}
+{block name='content'}
+
+<!-- content start -->
+<div class="admin-content">
+    <div class="admin-content-body">
+        <div class="am-cf am-padding am-padding-bottom-0">
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">添加商品</strong> / <small>Personal information</small></div>
+        </div>
+
+        <hr/>
+
+        <div class="am-g">
+            <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-bd">
+                        <div class="am-g">
+                            <div class="am-u-md-4">
+                                <img class="am-img-circle am-img-thumbnail" src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80" alt=""/>
+                            </div>
+                            <div class="am-u-md-8">
+                                <p>你可以使用<a href="#">gravatar.com</a>提供的头像或者使用本地上传头像。 </p>
+                                <form class="am-form">
+                                    <div class="am-form-group">
+                                        <input type="file" id="user-pic">
+                                        <p class="am-form-help">请选择要上传的文件...</p>
+                                        <button type="button" class="am-btn am-btn-primary am-btn-xs">保存</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+
+                <form class="am-form am-form-horizontal" action="{:url('admin/product/store')}" method="post">
+
+                    <div class="am-form-group">
+                        <div class="am-u-sm-3 am-form-label">所属分类</div>
+                        <div class="am-u-sm-4 am-u-md-2">
+                            <select data-am-selected="{btnSize: 'sm'}" name="category_id">
+                                <option value="2">果味</option>
+                                <option value="3">蔬菜</option>
+                                <option value="4">炒货</option>
+                                <option value="5">点心</option>
+                                <option value="6">粗茶</option>
+                                <option value="7">淡饭</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label for="user-name" class="am-u-sm-3 am-form-label">商品名称</label>
+                        <div class="am-u-sm-9">
+                            <input type="text" placeholder="" name="name">
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label for="user-phone" class="am-u-sm-3 am-form-label" name="price">商品价格</label>
+                        <div class="am-u-sm-9">
+                            <input type="tel" placeholder="" name="price">
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label for="user-QQ" class="am-u-sm-3 am-form-label">商品库存</label>
+                        <div class="am-u-sm-9">
+                            <input type="number" placeholder="" name="stock">
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <div class="am-u-sm-9 am-u-sm-push-3">
+                            <button type="submit" class="am-btn am-btn-primary">添加商品</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="admin-content-footer">
+        <hr>
+        <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+    </footer>
+
+</div>
+<!-- content end -->
+{/block}
