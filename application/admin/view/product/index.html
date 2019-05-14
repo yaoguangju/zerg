@@ -5,13 +5,11 @@
 <div class="admin-content">
     <div class="admin-content-body">
         <div class="am-cf am-padding am-padding-bottom-0">
-            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">表格</strong> /
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">商品管理</strong> /
                 <small>Table</small>
             </div>
         </div>
-
         <hr>
-
         <div class="am-g">
             <div class="am-u-sm-12">
                 <form class="am-form">
@@ -45,9 +43,12 @@
                                             </a>
                                         </button>
                                         <button class="">
-                                            <a  class="delete" data_id="{$vo.id}">删除</a>
+                                            <a  class=""
+                                                data_id="{$vo.id}"
+                                                href="{:url('admin/product/del',[ 'id'=>$vo['id'] ])}"
+                                                onclick="return confirm('确认删除！')"
+                                            >删除</a>
                                         </button>
-
                                     </div>
                                 </div>
                             </td>
@@ -84,41 +85,5 @@
     </footer>
 
 </div>
-
-<script>
-    $(function () {
-        $(".delete").click(function () {
-            var id = $(this).attr('data_id');
-            $.ajax({
-                    url: "{:url('admin/product/del')}",
-                    type: "POST",
-                    data: {id: id},
-                    dataType:"json",
-                    success: function (data) {
-                        if (data.code == 1){
-                            layer.msg(data.msg, {
-                                icon:6,
-                                time:2000
-                            },function () {
-                                location.href = data.url;
-                            });
-                        }else {
-                            layer.open({
-                                title:'删除失败',
-                                content:data.msg,
-                                icon:5,
-                                anim:6
-                            });
-                        }
-                    },
-                    error: function () {
-                        alert('删除栏目失败');
-                    }
-                });
-        })
-        return false;
-    });
-
-</script>
 
 {/block}

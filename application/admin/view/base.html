@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Amaze UI Admin form Examples</title>
+    <title>零食商贩后台</title>
     <meta name="description" content="这是一个form页面">
     <meta name="keywords" content="form">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,15 +23,13 @@
 
 <header class="am-topbar am-topbar-inverse admin-header">
     <div class="am-topbar-brand">
-        <strong>Amaze UI</strong> <small>后台管理模板</small>
+        <strong>零食商贩后台管理</strong>
     </div>
 
-    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
 
     <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
-
         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-            <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li>
             <li class="am-dropdown" data-am-dropdown>
                 <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
                     <span class="am-icon-users"></span> 管理员 <span class="am-icon-caret-down"></span>
@@ -42,7 +40,6 @@
                     <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
                 </ul>
             </li>
-            <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
         </ul>
     </div>
 </header>
@@ -54,16 +51,21 @@
             <ul class="am-list admin-sidebar-list">
             <li><a href="admin-index.html"><span class="am-icon-home"></span> 首页</a></li>
             <li class="admin-parent">
-                <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">商品管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
-                <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+                <a class="am-cf" data-am-collapse="{target: '#collapse-nav1'}">
+                    商品管理
+                    <span class="am-icon-angle-right am-fr am-margin-right"></span>
+                </a>
+                <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav1">
                     <li><a href="{:url('admin/product/add')}" class="am-cf"> 添加商品</a></li>
                     <li><a href="{:url('admin/product/index')}"> 商品详情 </a></li>
                 </ul>
             </li>
 
                 <li class="admin-parent">
-                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"> 订单管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
-                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav2'}">
+                        订单管理 <span class="am-icon-angle-right am-fr am-margin-right"></span>
+                    </a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav2">
                         <li><a href="{:url('admin/order/index')}">订单管理 </a></li>
                     </ul>
                 </li>
@@ -109,8 +111,6 @@
 <!--<![endif]-->
 <script src="__STATIC__/js/amazeui.min.js"></script>
 <script src="__STATIC__/js/app.js"></script>
-
-
 
 </body>
 </html>
