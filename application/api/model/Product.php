@@ -16,6 +16,7 @@ class Product extends BaseModel
      */
     public function imgs()
     {
+        // 一对多关联 一个商品有多个商品图片[被关联的模型，被关联模型和本模型的关联方法，本模型的主键]
         return $this->hasMany('ProductImage', 'product_id', 'id');
     }
 

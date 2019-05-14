@@ -14,10 +14,6 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="__STATIC__/css/amazeui.min.css"/>
     <link rel="stylesheet" href="__STATIC__/css/admin.css">
-    <script src="__STATIC__/js/jquery-1.8.2.min.js" type="application/javascript"></script>
-    <style>
-
-    </style>
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -62,14 +58,13 @@
                 <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
                     <li><a href="{:url('admin/product/add')}" class="am-cf"> 添加商品</a></li>
                     <li><a href="{:url('admin/product/index')}"> 商品详情 </a></li>
-                    <li><a href="admin-gallery.html"> 修改商品</a></li>
                 </ul>
             </li>
 
                 <li class="admin-parent">
                     <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"> 订单管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                     <ul class="am-list am-collapse admin-sidebar-sub am-in" id="">
-                        <li><a href="{:url('admin/order/index')}">订单详情 </a></li>
+                        <li><a href="{:url('admin/order/index')}">订单管理 </a></li>
                     </ul>
                 </li>
         </ul>
@@ -101,7 +96,6 @@
     <hr>
     <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
 </footer>
-
 
 
 <!--[if lt IE 9]>

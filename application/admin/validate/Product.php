@@ -5,11 +5,11 @@
  * Date: 2019-05-04
  * Time: 16:15
  */
-namespace app\admin\vaildate;
-use app\admin\validate\BaseValidate;
+namespace app\admin\validate;
+
 use think\Validate;
 
-class ProductAdd extends Validate
+class Product extends Validate
 {
     protected $rule = [
         'category_id' => 'require',

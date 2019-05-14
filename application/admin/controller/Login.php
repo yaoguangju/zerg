@@ -11,6 +11,14 @@ class Login extends Controller
 
         if($this->request->isPost()){
             $res = (new Admin())->login(input('post.'));
+            if($res['valid']){
+                // 登录成功
+                 $this->success($res['msg'],'admin/entry/index');
+            }
+            else{
+                // 登录失败
+                $this->error($res['msg']);exit;
+            }
         }
         return $this->fetch('index');
     }

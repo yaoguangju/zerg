@@ -1,0 +1,101 @@
+{extend name='base' /}
+{block name='content'}
+
+<div class="admin-content">
+    <div class="admin-content-body">
+        <div class="am-cf am-padding am-padding-bottom-0">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-lg">表单</strong> /
+                <small>form</small>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="am-tabs am-margin" data-am-tabs>
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <li><a href="#tab2">商品编辑</a></li>
+            </ul>
+
+            <div class="am-tabs-bd">
+                <div class="am-tab-panel am-fade" id="tab2">
+
+                    <form class="am-form"
+                          action="{:url('admin/product/edit')}"
+                          enctype="multipart/form-data"
+                          method="post">
+
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                商品分类
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <select data-am-selected="{btnSize: 'sm'}"
+                                        name="category_id"
+                                        value="{$oldData['category_id']}">
+                                    <option value="2">果味</option>
+                                    <option value="3">蔬菜</option>
+                                    <option value="4">炒货</option>
+                                    <option value="5">点心</option>
+                                    <option value="6">粗茶</option>
+                                    <option value="7">淡饭</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                商品名称
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" class="am-input-sm" name="name" value="{$oldData['name']}">
+                            </div>
+                        </div>
+
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                商品价格
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" class="am-input-sm" name="price"  value="{$oldData['price']}">
+                            </div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                商品库存
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="text" class="am-input-sm" name="stock"  value="{$oldData['stock']}">
+                            </div>
+                        </div>
+
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                商品图片
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+                                <input type="file" class="am-input-sm">
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="id" value="{$oldData['id']}" >
+
+                        <div class="am-margin">
+                            <button type="submit" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <footer class="admin-content-footer">
+        <hr>
+        <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+    </footer>
+</div>
+{/block}
