@@ -21,7 +21,7 @@ class product extends Controller
 
     //商品首页
     public function index(){
-        $field = db('product')->select();
+        $field = db('product')->paginate(15);
         $this->assign('field',$field);
         return view();
     }
@@ -63,8 +63,8 @@ class product extends Controller
 
     // 商品删除
     public function del(){
-        $cateInfo = $this->db->find(input('post.id'));
-        $result = $cateInfo->delete();
+        $productInfo = $this->db->find(input('post.id'));
+        $result = $productInfo->delete();
         if($result){
             $this->success('栏目删除成功','admin/product/index');
         }else{

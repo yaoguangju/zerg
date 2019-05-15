@@ -4,15 +4,19 @@
 <div class="admin-content">
     <div class="admin-content-body">
         <div class="am-cf am-padding am-padding-bottom-0">
-            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">表格</strong> / <small>Table</small></div>
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">订单管理</strong> /
+                <small>order manage</small>
+            </div>
         </div>
         <hr>
         <div class="am-g">
             <div class="am-u-sm-12">
+
                 <form class="am-form">
                     <table class="am-table am-table-striped am-table-hover table-main">
                         <thead>
                         <tr>
+                            <th class="table-title">订单ID</th>
                             <th class="table-title">订单号</th>
                             <th class="table-type">订单名称</th>
                             <th class="table-author am-hide-sm-only">商品总数</th>
@@ -23,25 +27,50 @@
                         </tr>
                         </thead>
                         <tbody id="order-table">
+                        <!--name是指定循环的数据-->
+                        {foreach name='field' key='key' item='vo'}
+                        <tr>
+                            <td>{$vo['id']}</td>
+                            <td>{$vo['order_no']}</td>
+                            <td>{$vo['snap_name']}</td>
+                            <td>{$vo['total_count']}</td>
+                            <td>{$vo['total_price']}</td>
+                            <td>{$vo['status']|getOrderStatus}</td>
+                            <td>{$vo['create_time']|date='Y年m月d日-h:d:s',###}</td>
+                            <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+
+                                        <button class="edit">
+                                            <a href="{:url('admin/order/deliver',[ 'id'=>$vo['id'] ])}">
+                                                发货
+                                            </a>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {/foreach}
 
                         </tbody>
 
                     </table>
-                    <!--<div class="am-cf">-->
-                    <!--共 15 条记录-->
-                    <!--<div class="am-fr">-->
-                        <!--<ul class="am-pagination">-->
-                            <!--<li class="am-disabled"><a href="#">«</a></li>-->
-                            <!--<li class="am-active"><a href="#">1</a></li>-->
-                            <!--<li><a href="#">2</a></li>-->
-                            <!--<li><a href="#">3</a></li>-->
-                            <!--<li><a href="#">4</a></li>-->
-                            <!--<li><a href="#">5</a></li>-->
-                            <!--<li><a href="#">»</a></li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                <!--</div>-->
-                    <hr />
+                    <div class="am-cf">
+                        <div class="am-fr">
+                            <!--<ul class="am-pagination">-->
+                                <!--<li class="am-disabled"><a href="#">«</a></li>-->
+                                <!--<li class="am-active"><a href="#">1</a></li>-->
+                                <!--<li><a href="#">2</a></li>-->
+                                <!--<li><a href="#">3</a></li>-->
+                                <!--<li><a href="#">4</a></li>-->
+                                <!--<li><a href="#">5</a></li>-->
+                                <!--<li><a href="#">»</a></li>-->
+                            <!--</ul>-->
+                            {$field->render()}
+                        </div>
+                    </div>
+                    <hr/>
                     <p>注：.....</p>
                 </form>
             </div>
@@ -55,151 +84,5 @@
     </footer>
 
 </div>
-
-<script>
-    $(function(){
-        var pageIndex=1;
-        getOrders(pageIndex);
-
-        /*
-        * 获取数据 分页
-        * params:
-        * pageIndex - {int} 分页下表  1开始
-        */
-        function getOrders(pageIndex){
-            var params={
-                url:'order/paginate',
-                data:{page:pageIndex,size:20},
-                tokenFlag:false,
-                sCallback:function(res) {
-                    var str = getOrderHtmlStr(res);
-                    $('#order-table').append(str);
-                }
-            };
-            getData(params);
-        }
-
-        function getData(params){
-            if(!params.type){
-                params.type='get';
-            }
-            var that=this;
-            $.ajax({
-                type:params.type,
-                url:'http://z.cn/api/'+params.url,
-                data:params.data,
-                success:function(res){
-                    params.sCallback && params.sCallback(res);
-                },
-                error:function(res){
-                    params.eCallback && params.eCallback(res);
-                }
-            });
-        }
-
-        /*拼接html字符串*/
-        function getOrderHtmlStr(res){
-            var data = res.data;
-            if (data){
-                var len = data.length,
-                    str = '',
-                    item;
-
-                if(len>0) {
-                    for (var i = 0; i < len; i++) {
-                        item = data[i];
-                        str += '<tr>' +
-                            '<td>' + item.order_no + '</td>' +
-                            '<td>' + item.snap_name + '</td>' +
-                            '<td>' + item.total_count + '</td>' +
-                            '<td>￥' + item.total_price + '</td>' +
-                            '<td>' + getOrderStatus(item.status) + '</td>' +
-                            '<td>' + item.create_time + '</td>' +
-                            '<td data-id="' + item.id + '">' + getBtns(item.status) + '</td>' +
-                            '</tr>';
-                    }
-                }
-                else{
-                    ctrlLoadMoreBtn();
-                    moreDataFlag=false;
-                }
-                return str;
-            }
-            return '';
-        }
-
-        /*根据订单状态获得标志*/
-        function getOrderStatus(status){
-            var arr=[{
-                cName:'unpay',
-                txt:'未付款'
-            },{
-                cName:'payed',
-                txt:'已付款'
-            },{
-                cName:'done',
-                txt:'已发货'
-            },{
-                cName:'unstock',
-                txt:'缺货'
-            }];
-            return '<span class="order-status-txt '+arr[status-1].cName+'">'+arr[status-1].txt+'</span>';
-        }
-
-        /*根据订单状态获得 操作按钮*/
-        function getBtns(status){
-            var arr=[{
-                cName:'done',
-                txt:'发货'
-            },{
-                cName:'unstock',
-                txt:'缺货'
-            }];
-            if(status==2 || status==4){
-                var index=0;
-                if(status==4){
-                    index=1;
-                }
-                return '<span class="order-btn '+arr[index].cName+'">'+arr[index].txt+'</span>';
-            }else{
-                return '';
-            }
-        }
-
-        /*发货*/
-        $(document).on('click','.order-btn.done',function(){
-            var $this=$(this),
-                $td=$this.closest('td'),
-                $tr=$this.closest('tr'),
-                id=$td.attr('data-id'),
-                $tips=$('.global-tips'),
-                $p=$tips.find('p');
-            var params={
-                url:'order/delivery',
-                type:'put',
-                data:{id:id},
-                tokenFlag:true,
-                sCallback:function(res) {
-                    if(res.code.toString().indexOf('2')==0){
-                        $tr.find('.order-status-txt')
-                            .removeClass('pay').addClass('done')
-                            .text('已发货');
-                        $this.remove();
-                        $p.text('操作成功');
-                    }else{
-                        $p.text('操作失败');
-                    }
-                    $tips.show().delay(1500).hide(0);
-                },
-                eCallback:function(){
-                    $p.text('操作失败');
-                    $tips.show().delay(1500).hide(0);
-                }
-            };
-            getData(params);
-        });
-
-    });
-</script>
 
 {/block}

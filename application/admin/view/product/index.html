@@ -6,7 +6,7 @@
     <div class="admin-content-body">
         <div class="am-cf am-padding am-padding-bottom-0">
             <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">商品管理</strong> /
-                <small>Table</small>
+                <small>product manege</small>
             </div>
         </div>
         <hr>
@@ -31,7 +31,9 @@
                             <td>{$vo['id']}</td>
                             <td><a href="#">{$vo['name']}</a></td>
                             <td>{$vo['price']}</td>
-                            <td class="am-hide-sm-only">{$vo['category_id']}</td>
+                            <td class="am-hide-sm-only">
+                                {$vo['category_id']|getCategory}
+                            </td>
                             <td class="am-hide-sm-only">{$vo['stock']}</td>
                             <td>
                                 <div class="am-btn-toolbar">
@@ -42,11 +44,9 @@
                                                 编辑
                                             </a>
                                         </button>
-                                        <button class="">
-                                            <a  class=""
-                                                data_id="{$vo.id}"
-                                                href="{:url('admin/product/del',[ 'id'=>$vo['id'] ])}"
-                                                onclick="return confirm('确认删除！')"
+                                        <button>
+                                            <a href="{:url('admin/product/del',[ 'id'=>$vo['id'] ])}"
+                                               onclick="return confirm('确认删除！')"
                                             >删除</a>
                                         </button>
                                     </div>
@@ -58,19 +58,20 @@
                         </tbody>
                     </table>
                     <div class="am-cf">
-                        共 15 条记录
                         <div class="am-fr">
-                            <ul class="am-pagination">
-                                <li class="am-disabled"><a href="#">«</a></li>
-                                <li class="am-active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">»</a></li>
-                            </ul>
+                            <!--<ul class="am-pagination">-->
+                            <!--<li class="am-disabled"><a href="#">«</a></li>-->
+                            <!--<li class="am-active"><a href="#">1</a></li>-->
+                            <!--<li><a href="#">2</a></li>-->
+                            <!--<li><a href="#">3</a></li>-->
+                            <!--<li><a href="#">4</a></li>-->
+                            <!--<li><a href="#">5</a></li>-->
+                            <!--<li><a href="#">»</a></li>-->
+                            <!--</ul>-->
+                            {$field->render()}
                         </div>
                     </div>
+
                     <hr/>
                     <p>注：.....</p>
                 </form>
